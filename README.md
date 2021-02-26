@@ -1,22 +1,24 @@
-# sass-spec
+# FastSassSpec
+
+** Currently Being Updated **
 
 ### A cross-implementation [Sass][] test suite
 
-* [Running Specs](#running-specs)
-  * [Dart Sass](#dart-sass)
-  * [LibSass](#libsass)
-* [Spec Structure](#spec-structure)
-  * [HRX](#hrx)
-  * [Specifying Warnings](#specifying-warnings)
-  * [Implementation-Specific Expectations](#implementation-specific-expectations)
-  * [Options](#options)
-    * [`:todo`](#todo)
-    * [`:warning_todo`](#warning_todo)
-    * [`:ignore_for`](#ignore_for)
-* [Spec Style](#spec-style)
-* [Interactive Mode](#interactive-mode)
+- [Running Specs](#running-specs)
+  - [Dart Sass](#dart-sass)
+  - [LibSass](#libsass)
+- [Spec Structure](#spec-structure)
+  - [HRX](#hrx)
+  - [Specifying Warnings](#specifying-warnings)
+  - [Implementation-Specific Expectations](#implementation-specific-expectations)
+  - [Options](#options)
+    - [`:todo`](#todo)
+    - [`:warning_todo`](#warning_todo)
+    - [`:ignore_for`](#ignore_for)
+- [Spec Style](#spec-style)
+- [Interactive Mode](#interactive-mode)
 
-[Sass]: https://sass-lang.com
+[sass]: https://sass-lang.com
 
 [![Build Status](https://travis-ci.org/sass/sass-spec.svg)](https://travis-ci.org/sass/sass-spec)
 
@@ -28,7 +30,7 @@ implementations to ensure that they correctly implement the language.
 Before running specs, you'll need to install [Node.js] 14.14 or newer. Then, from the root of
 this repo, run `npm install`.
 
-[Node.j]: https://nodejs.org/en/download/
+[node.j]: https://nodejs.org/en/download/
 
 From there, it depends which implementation you're testing:
 
@@ -38,9 +40,9 @@ To run specs against [Dart Sass][], the reference implementation of Sass that's
 used for [the `sass` package][] on npm, you'll first need to install [Dart][].
 Then run:
 
-[Dart Sass]: https://sass-lang.com/dart-sass
+[dart sass]: https://sass-lang.com/dart-sass
 [the `sass` package]: https://npmjs.com/package/sass
-[Dart]: https://www.dartlang.org/
+[dart]: https://www.dartlang.org/
 
 ```sh
 # If you already have a clone of the Dart Sass repo, you can use that instead.
@@ -57,9 +59,9 @@ To run specs against [LibSass][], the C++ Sass implementation that's used for
 [Node Sass][] and other languages' Sass wrappers, you'll need to be able to
 [build LibSass][]. Once you have all the build dependencies:
 
-[LibSass]: https://sass-lang.com/libsass
-[Node Sass]: https://npmjs.com/package/node-sass
-[build LibSass]: https://github.com/sass/libsass/blob/master/docs/build.md
+[libsass]: https://sass-lang.com/libsass
+[node sass]: https://npmjs.com/package/node-sass
+[build libsass]: https://github.com/sass/libsass/blob/master/docs/build.md
 
 ```sh
 # If you already have a clone of the LibSass repo, you can use that instead.
@@ -75,10 +77,10 @@ npm run sass-spec -- --impl libsass -c $SASSC_PATH
 Each spec is defined by a directory with an `input.scss` or `input.sass` file
 and either:
 
-* An `output.css` file, in which case the spec asserts that the Sass
+- An `output.css` file, in which case the spec asserts that the Sass
   implementation compiles the input to the output. These specs are known as
   "success specs".
-* An `error` file, in which case the spec asserts that the Sass implementation
+- An `error` file, in which case the spec asserts that the Sass implementation
   prints the error message to standard error and exits with a non-zero status
   code when it compiles the input. These specs are known as "error specs".
 
@@ -100,7 +102,7 @@ reviewers to see the context of specs they're reviewing. The spec runner treats
 each HRX file as a directory with the same name as the file, minus `.hrx`. For
 example:
 
-[HRX files]: https://github.com/google/hrx#human-readable-archive-hrx
+[hrx files]: https://github.com/google/hrx#human-readable-archive-hrx
 
 ```hrx
 <===> input.scss
@@ -148,7 +150,7 @@ physical directory. Conversely, if a given directory contains many small HRX
 archives, they should be merged together into one larger file. This helps ensure
 that the repo remains easy to navigate.
 
-The only specs that *aren't* written in HRX format are those that include
+The only specs that _aren't_ written in HRX format are those that include
 invalid UTF-8 byte sequences. The HRX format is itself written in UTF-8, so it's
 unable to represent the files in these specs.
 
@@ -195,7 +197,7 @@ eventually be removed.
 ```yaml
 ---
 :todo:
-- sass/libsass#2827
+  - sass/libsass#2827
 ```
 
 This option indicates implementations that should add support for a spec, but
@@ -214,8 +216,8 @@ If the `--run-todo` flag is passed to `sass-spec.rb`, specs marked as `:todo`
 for the current implementation will be run, and their failures will be reported.
 
 If the `--probe-todo` flag is passed to `sass-spec.rb`, specs marked as `:todo`
-for the current implementation will be run, but a failure will be reported *only
-if those specs pass*. This is used to determine which specs need to have `:todo`
+for the current implementation will be run, but a failure will be reported _only
+if those specs pass_. This is used to determine which specs need to have `:todo`
 removed once a feature has been implemented. This can be used in combination
 with [`--interactive`](#interactive-mode) to automatically remove `:todo`s for
 these specs.
@@ -225,7 +227,7 @@ these specs.
 ```yaml
 ---
 :warning_todo:
-- sass/libsass#2834
+  - sass/libsass#2834
 ```
 
 This option works like [`:todo`](#todo), except instead of skipping the entire
@@ -238,7 +240,7 @@ normal. This should not be used for error specs.
 ```yaml
 ---
 :ignore_for:
-- libsass
+  - libsass
 ```
 
 This option indicates implementations that are never expected to be compatible
@@ -279,7 +281,7 @@ X. Exit testing.
 [implementation-specific expectations]: #implementation-specific-expectations
 
 Any option can also be applied to all future occurences of that type of failure
-by adding `!` after it. For example, if you want to mark *all* failing specs as
+by adding `!` after it. For example, if you want to mark _all_ failing specs as
 `:todo` for the current implementation you'd type `I!`.
 
 ## Tests
